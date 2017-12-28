@@ -9,6 +9,7 @@
   <script type="text/javascript" src="/js/validateparameter.js"></script>
   <script type="text/javascript">
     $(document).ready(function(){
+
       $("form").submit(function(){
           
           if(!isValidIP($("#HOST").val()))
@@ -33,6 +34,7 @@
             //返回false禁止向服务器发送请求
             return false;
           }
+          
       });
     })
     </script>
