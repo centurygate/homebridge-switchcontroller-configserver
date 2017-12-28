@@ -3,6 +3,34 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script type="text/javascript" src="/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="/js/validateparameter.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+      $("form").submit(function(){
+          
+          if(!isValidIP($("#HOST").val()))
+          {
+            alert('输入的HOST 非法');
+
+            //返回false禁止向服务器发送请求
+            return false;
+          }
+          if(!isValidPort($("#PORT").val()))
+          {
+            alert('输入的PORT 非法');
+            //返回false禁止向服务器发送请求
+            return false;
+          }
+          if(!isValidGroup($("#GROUP").val()))
+          {
+            alert('输入的GROUP 非法');
+            //返回false禁止向服务器发送请求
+            return false;
+          }
+      });
+    })
+    </script>
   </head>
   <body>
     <h1><%= title %></h1>
@@ -10,10 +38,14 @@
     <form action="/save" method="post">
       <br>
       <br>
-      设备 IP <input type ="text" name="HOST" value=''>&nbsp;&nbsp;网络端口 <input type ="text" name="PORT" value=''>&nbsp;&nbsp; 组号 <input type="text" name="GROUP" value=''>
+      <% if(configobj['accessories'].length > 0) { %>
+      设备 IP <input id="HOST" type ="text" name="HOST" value=<%= configobj['accessories'][0].HOST %> >&nbsp;&nbsp;网络端口 <input id="PORT" type ="text" name="PORT" value=<%= configobj['accessories'][0].PORT %>>&nbsp;&nbsp; 组号 <input id="GROUP" type="text" name="GROUP" value=<%= configobj['accessories'][0].GROUP %>>
+      <% } else { %>
+      设备 IP <input id="HOST" type ="text" name="HOST" value='' >&nbsp;&nbsp;网络端口 <input id="PORT" type ="text" name="PORT" value=''>&nbsp;&nbsp; 组号 <input id="GROUP"  type="text" name="GROUP" value=''>
+      <% }%>
       <br>
       <br>
-      <input type="submit" value="设置生效">
+      <input id="submit" type="submit" value="设置生效">
       <br>
       </form>
       <p>======================现有的通道列表======================</p>
