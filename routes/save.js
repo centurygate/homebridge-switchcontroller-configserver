@@ -1,11 +1,13 @@
 var express = require('express');
 var fs = require('fs');
 var router = express.Router();
-
+var configpath = "/root/.homebridge/config.json";
+var process = require('child_process');
 /* GET users listing. */
 router.post('/', function(req, res, next) {
     var configobj = JSON.parse(fs.readFileSync("D:/config.json"));
-    //console.log("======contents of config.json in D:/config.json");
+    configobj['accessories'] = configobj['accessories']||[];
+    console.log("======contents of config.json in "+configpath);
     console.log(JSON.stringify(req.body));
     //wirte eight channels for the switch controller
     for(var i = 0; i < 8; i++)
@@ -27,7 +29,12 @@ router.post('/', function(req, res, next) {
             "GROUP": req.body.GROUP
         }
     }
+    console.log("Will Write Contents as below to config.json .....................................");
+    console.log(JSON.stringify(configobj,null,4));
     fs.writeFileSync("D:/config.json",JSON.stringify(configobj,null,4));
+    process.exec('reboot -f',function(err, stdout, stderr){
+        console.log(stdout);
+      });
     //res.writeHead(200,{'Content-Type':'application/json'});
     //res.end(JSON.stringify(configobj,null,4));
     res.redirect('/');
