@@ -4,8 +4,8 @@ function isValidIP(ip) {
 }
 function isValidPort(str)  
 {  
-    var parten=/^(\d)+$/g;  
-    if(parten.test(str)&&parseInt(str)<=65535&&parseInt(str)>=0){  
+    var pattern=/^(\d)+$/g;  
+    if(pattern.test(str)&&parseInt(str)<=65535&&parseInt(str)>=0){  
         return true;  
      }else{  
         return false;  
@@ -13,8 +13,8 @@ function isValidPort(str)
 }
 function isValidGroup(str)  
 {  
-    var parten=/^(\d)+$/g;  
-    if(parten.test(str)&&parseInt(str)<=15&&parseInt(str)>=1){  
+    var pattern=/^(\d)+$/g;  
+    if(pattern.test(str)&&parseInt(str)<=15&&parseInt(str)>=1){  
         return true;  
      }else{  
         return false;  
