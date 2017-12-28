@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <!-- <p> <%= title %></p> -->
+    <form action="/save" method="post">
+      <br>
+      <br>
+      设备 IP <input type ="text" name="HOST" value=''>&nbsp;&nbsp;网络端口 <input type ="text" name="PORT" value=''>&nbsp;&nbsp; 组号 <input type="text" name="GROUP" value=''>
+      <br>
+      <br>
+      <input type="submit" value="设置生效">
+      <br>
+      </form>
+      <p>======================现有的通道列表======================</p>
+      <ul>
+        <% for(var i =0; i < configobj['accessories'].length;i++) { %>
+        <!-- <li><%= JSON.stringify(configobj['accessories'][i].HOST) %> &nbsp;&nbsp;<%= JSON.stringify(configobj['accessories'][i].PORT) %>&nbsp;&nbsp;<%= JSON.stringify(configobj['accessories'][i].GROUP) %> &nbsp;&nbsp;<%= JSON.stringify(configobj['accessories'][i].name) %> &nbsp;&nbsp; -->
+          <li><%= configobj['accessories'][i].HOST %> &nbsp;&nbsp;<%= configobj['accessories'][i].PORT %>&nbsp;&nbsp;<%= configobj['accessories'][i].GROUP %> &nbsp;&nbsp;<%= configobj['accessories'][i].name %> &nbsp;&nbsp;
+        </li>
+        <% } %>
+      </ul>
+  </body>
+</html>
